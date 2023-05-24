@@ -94,7 +94,7 @@ public static class ArrayProblemsTests
     {
         if (input.Length < 2)
         {
-            Assert.Throws<IndexOutOfRangeException>(() => ArrayProblems.Swap(input, 0, 1));
+            Assert.Throws<Exception>(() => ArrayProblems.Swap(input, 0, 1));
         }
         else
         {

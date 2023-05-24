@@ -4,38 +4,97 @@ public static class ArrayProblems
 {
     public static bool AreArraysEqual<T>(T[] xs, T[] ys)
     {
-        throw new NotImplementedException();
+        if(xs.Length != ys.Length) { return false; }
+        else
+        {
+            for (int i = 0; i < xs.Length; i++)
+            {
+                if (!xs[i].Equals( ys[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     public static void Swap<T>(T[] xs, int a, int b)
     {
-        xs[a] = xs[b];
-        xs[b] = xs[a];
+
+        if (xs.Length < 2)
+        {
+            throw new Exception();
+        }
+        else
+        {
+            T temp = xs[a];
+            xs[a] = xs[b];
+            xs[b] = temp;
+        }
+
     }
 
     public static T FirstElement<T>(T[] xs)
     {
-        throw new NotImplementedException();
+        if(xs.Length < 1)
+        {
+            throw new Exception();
+        }
+        else
+        {
+            return xs[0];
+        }
     }
 
     public static T LastElement<T>(T[] xs)
     {
-        throw new NotImplementedException();
+        if (xs.Length < 1)
+        {
+            throw new Exception();
+        }
+        else
+        {
+            return xs[xs.Length-1];
+        }
     }
 
     public static T MiddleElement<T>(T[] xs)
     {
-        throw new NotImplementedException();
+        if (xs.Length < 1)
+        {
+            throw new Exception();
+        }
+        else
+        {
+            return xs[xs.Length/2];
+        }
     }
 
     public static void Reverse<T>(T[] xs)
     {
-        throw new NotImplementedException();
+        for(int i = 0; i < xs.Length / 2; i++)
+        {
+            var j = xs.Length - i - 1;
+            if (i != j)
+            {
+                T temp = xs[i];
+                xs[i] = xs[j];
+                xs[j] = temp;
+            }
+        }
     }
 
     public static int CountElement<T>(T[] xs, T element)
     { 
-        throw new NotImplementedException();
+        int result = 0;
+        for (int i = 0; i < xs.Length; i++)
+        {
+            if(xs[i].Equals(element))
+            {
+                result++;
+            }
+        }
+        return result;
     }
 
     public static string ToCommaDelimitedString<T>(T[] xs)
