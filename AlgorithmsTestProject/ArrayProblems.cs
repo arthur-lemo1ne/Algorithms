@@ -38,7 +38,7 @@ public static class ArrayProblems
     {
         if(xs.Length < 1)
         {
-            throw new Exception();
+            throw new IndexOutOfRangeException();
         }
         else
         {
@@ -50,7 +50,7 @@ public static class ArrayProblems
     {
         if (xs.Length < 1)
         {
-            throw new Exception();
+            throw new IndexOutOfRangeException();
         }
         else
         {
@@ -62,7 +62,7 @@ public static class ArrayProblems
     {
         if (xs.Length < 1)
         {
-            throw new Exception();
+            throw new IndexOutOfRangeException();
         }
         else
         {
@@ -99,28 +99,90 @@ public static class ArrayProblems
 
     public static string ToCommaDelimitedString<T>(T[] xs)
     {
-        throw new NotImplementedException();
+        string result = "";
+        for (int i = 0; i < xs.Length; i++)
+        {
+            if(i < xs.Length - 1)
+            {
+                result += xs[i] + ",";
+            }
+            else
+            {
+                result += xs[i];
+            }
+        }
+        Console.WriteLine(result);
+        return result;
     }
 
     // Bonus problems
 
     public static int Count<T>(T[] xs, Func<T, bool> predicate)
     {
-        throw new NotImplementedException();
+        int result = 0;
+        for (int i = 0; i < xs.Length; i++)
+        {
+            if (predicate(xs[i]))
+            {
+                result++;
+            }
+        }
+        return result;
     }
 
     public static T Min<T>(T[] xs, Func<T, T, int> comparer)
     {
-        throw new NotImplementedException();
+        if(xs.Length < 1)
+        {
+            throw new IndexOutOfRangeException();
+        }
+        else
+        {
+            T result = xs[0];
+            for (int i = 0; i < xs.Length; i++)
+            {
+                if(-1 == comparer(xs[i],result))
+                {
+                    result = xs[i];
+                }
+            }
+            return result;
+        }
+        
     }
 
     public static T Max<T>(T[] xs, Func<T, T, int> comparer)
     {
-        throw new NotImplementedException();
+        if (xs.Length < 1)
+        {
+            throw new IndexOutOfRangeException();
+        }
+        else
+        {
+            T result = xs[0];
+            for (int i = 0; i < xs.Length; i++)
+            {
+                if (1 == comparer(xs[i], result))
+                {
+                    result = xs[i];
+                }
+            }
+            return result;
+        }
     }
 
     public static bool HasDuplicates<T>(T[] xs)
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < xs.Length; i++)
+        {
+            for (int j = i+1; j < xs.Length; j++)
+            {
+                if(xs[i].Equals(xs[j]))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

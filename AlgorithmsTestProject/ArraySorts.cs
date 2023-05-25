@@ -4,12 +4,33 @@
     {
         public static void MySort1(int[] array)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = i; j < array.Length; j++)
+                {
+                    if(array[j] < array[i])
+                    {
+                        int temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                }
+            }
         }
 
         public static void MySort2(int[] array)
         {
-            throw new NotImplementedException();
+            Random rand = new Random();
+            while (!ArraySortTests.IsSorted(array))
+            {
+                int i = rand.Next(array.Length - 1);
+                int j = rand.Next(array.Length - 1);
+
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+
+            }
         }
 
         public static void MergeSort(int[] array)
