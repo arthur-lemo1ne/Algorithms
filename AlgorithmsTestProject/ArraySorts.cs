@@ -76,9 +76,47 @@
             throw new NotImplementedException();
         }
 
+        private static void MyQuickSort(int[] array, int l, int h)
+        {
+            if(l>h && array.Length>0)
+            {
+                int p = partition(array, l, h);
+                MyQuickSort(array, l, p - 1);
+                MyQuickSort(array, p + 1, h);
+            }
+        }
+
+        private static int partition(int[] array, int l, int h)
+        {
+            int pivot = array[h];
+
+            int i = l-1;
+
+            int temp = 0;
+
+            for (int j = l; j <= h-1; j++)
+            {
+                if(array[j]< pivot)
+                {
+                    i++;
+                    temp = array[j];
+                    array[j] = array[i];
+                    array[i] = temp;
+                }
+            }
+
+            temp = array[h];
+            array[h] = array[i+1];
+            array[i+1] = temp;
+
+            return i + 1;
+
+
+        }
+
         public static void QuickSort(int[] array)
         {
-            throw new NotImplementedException();
+            MyQuickSort(array, 0, array.Length-1);
         }
 
         public static void BlockSort(int[] array)
@@ -102,11 +140,37 @@
 
         public static void GnomeSort(int[] array)
         {
-            throw new NotImplementedException();
+            int position = 0;
+            while(position < array.Length)
+            {
+                if(position == 0 || array[position] >= array[position - 1])
+                {
+                    position++;
+                }
+                else
+                {
+                    int temp = array[position];
+                    array[position] = array[position - 1];
+                    array[position - 1] = temp;
+                    position--;
+                }
+            }
         }
 
         public static void SelectionSort(int[] array)
         {
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = i; j < array.Length; j++)
+                {
+                    if(array[i] > array[j])
+                    {
+                        int temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                }
+            }
         }
     }
 }
