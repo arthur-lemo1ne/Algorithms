@@ -1,48 +1,63 @@
-﻿namespace AlgorithmsTestProject
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgorithmsTestProject
 {
-	public static class StackQueueProblemTests
-	{
+    public static class StackQueueProblemTests
+    {
         [Test]
-        public static void TestStackPush()
+        public static void TestStack()
         {
-            var t = new Stack<int>();
-            t.Push(3);
-
-            var f = new Stack<int>();
-            Assert.AreEqual(t.Peek(), 3);
-        }
-
-        [Test]
-        public static void TestStackPeek()
-        {
-            var t = new Stack<int>();
-            t.Push(3);
-
+            var stack = new Stack<int>();
+            stack.Push(1);
+            Assert.AreEqual(1, stack.Peek());
+            stack.Push(2);
+            Assert.AreEqual(2, stack.Peek());
+            stack.Push(3);
+            Assert.AreEqual(3, stack.Peek());
             
-            Assert.AreEqual(t.Peek(), 3);
+            Assert.AreEqual(3, stack.Pop());
+            Assert.AreEqual(2, stack.Pop());
+            Assert.AreEqual(1, stack.Pop());
         }
 
         [Test]
-        public static void TestStackPop()
+        public static void TestQueue()
         {
-            var t = new Stack<int>();
-            t.Push(3);
-            t.Push(3);
-            t.Push(3);
-            t.Push(4);
+            var q = new Queue<int>();
+            q.Enqueue(1);
+            Assert.AreEqual(1, q.Peek());
+            q.Enqueue(2);
+            Assert.AreEqual(1, q.Peek());
+            q.Enqueue(3);
+            Assert.AreEqual(1, q.Peek());
 
+            Assert.AreEqual(1, q.Dequeue());
+            Assert.AreEqual(2, q.Dequeue());
+            Assert.AreEqual(3, q.Dequeue());
+        }
 
-            Assert.AreEqual(t.Pop(), 4);
+        public static IEnumerable<int> PriorityQueueSort(
+            IPriorityQueue<int> pq, 
+            IEnumerable<int> input)
+        {
+            foreach (var x in input)
+                pq.Enqueue(-x, x);
+
+            while (!pq.IsEmpty)
+                yield return pq.DequeueHighestPriority();
         }
 
         [Test]
-        public static void TestStackIsEmpty()
+        public static void TestPriorityQueue()
         {
-            var t = new Stack<int>();
-            Assert.AreEqual(t.IsEmpty, true);
-            t.Push(3);
-            Assert.AreEqual(t.IsEmpty, false);
+            var input = new[] { 9, 2, 3, 7, 6, 5, 1, 4, 8 };
+            var output = PriorityQueueSort(new PriorityQueue<int>(), input);
+            Assert.AreEqual(input, output);
         }
     }
 }
-

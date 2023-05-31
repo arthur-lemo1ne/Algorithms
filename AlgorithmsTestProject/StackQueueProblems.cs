@@ -3,63 +3,52 @@ namespace AlgorithmsTestProject
 {
     public class Stack<T> : IStack<T>
     {
-
-        private List<T> stack;
-
-        public bool IsEmpty { get; set; }
-
-        public Stack()
-        {
-            stack = new List<T>();
-            IsEmpty = true;
-        }
+        public LinkedList<T> memberList = new();
 
         public void Push(T x)
         {
-            stack.Add(x);
-            if(IsEmpty == true)
-            {
-                IsEmpty = false;
-            }
+            memberList.Insert(memberList.GetIterator(), x);
         }
 
         public T Pop()
         {
-            var ret = stack.Last();
-            stack.Remove(ret);
-            if(IsEmpty == false && stack.Count == 0)
-            {
-                IsEmpty = true;
-            }
-            return ret;
+            var iter = memberList.GetIterator();
+            var r = iter.GetElement();
+            memberList.Remove(iter);
+            return r;
         }
 
         public T Peek()
         {
-            return stack.Last();
+            var iter = memberList.GetIterator();
+            return iter.GetElement();
         }
 
+        public bool IsEmpty
+        {
+            get
+            {
+                var iter = memberList.GetIterator();
+                return !iter.HasValue();
+            }
+        }
     }
 
     public class Queue<T> : IQueue<T>
     {
-        private List<T> queue = new List<T>();
-
         public void Enqueue(T x)
         {
-            queue.Add(x);
+            throw new NotImplementedException();
         }
 
         public T Dequeue()
         {
-            var ret = queue.First();
-            queue.Remove(queue.First());
-            return ret;
+            throw new NotImplementedException();
         }
 
         public T Peek()
         {
-            return queue.First();
+            throw new NotImplementedException();
         }
 
         public bool IsEmpty { get; }
@@ -67,42 +56,22 @@ namespace AlgorithmsTestProject
 
     public class PriorityQueue<T> : IPriorityQueue<T>
     {
-
-        private List<(T,int)> pqueue = new List<(T, int)>();
-
         public void Enqueue(int priority, T element)
         {
-            pqueue.Add((element, priority));
+            throw new NotImplementedException();
         }
 
         public T PeekHighestPriority()
         {
-            (T,int) selected = (default,0);
-            foreach (var item in pqueue)
-            {
-                if(item.Item2 > selected.Item2)
-                {
-                    selected = item;
-                }
-            }
-            return selected.Item1;
+            throw new NotImplementedException();
         }
 
         public T DequeueHighestPriority()
         {
-            (T, int) selected = (default, 0);
-            foreach (var item in pqueue)
-            {
-                if (item.Item2 > selected.Item2)
-                {
-                    selected = item;
-                }
-            }
-            pqueue.Remove(selected);
-            return selected.Item1;
+            throw new NotImplementedException();
         }
 
-        public bool IsEmpty { get; }
+        public bool IsEmpty => throw new NotImplementedException();
     }
 
     public class QueueFromStack<T> : IQueue<T>
