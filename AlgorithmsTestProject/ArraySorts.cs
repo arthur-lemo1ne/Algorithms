@@ -31,7 +31,18 @@
 
         public static void MergeSort(int[] array)
         {
-            throw new NotImplementedException();
+            int n1 = array.Length / 2 + 1;
+            int n2 = array.Length - (array.Length / 2);
+
+            int[] L = new int[n1];
+            int[] R = new int[n2];
+
+            for (int i = 0; i < n1; ++i)
+                L[i] = array[0 + i];
+            for (int j = 0; j < n2; ++j)
+                R[j] = array[(array.Length / 2) + 1 + j];
+
+
         }
 
         public static void HeapSort(int[] array)

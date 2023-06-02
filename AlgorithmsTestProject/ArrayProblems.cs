@@ -4,6 +4,46 @@ namespace AlgorithmsTestProject;
 
 public static class ArrayProblems
 {
+
+    public static int[] MSort(int[] arr, int l, int r)
+    {
+        return new int[] { 0 };
+    }
+
+    public static int[] Merge(int[] l1, int[] l2)
+    {
+        int[] result = new int[l1.Length+l2.Length];
+        int i = 0, j = 0;
+        int k = 0;
+        while (i < l1.Length && j < l2.Length)
+        {
+            if(l1[i] <= l2[j])
+            {
+                result[k] = l1[i];
+                i++;
+            }
+            else
+            {
+                result[k] = l2[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < l1.Length)
+        {
+            result[k] = l1[i];
+            i++;
+            k++;
+        }
+        while ( j < l2.Length)
+        {
+            result[k] = l2[j];
+            j++;
+            k++;
+        }
+        return result;
+    }
+
     public static bool AreArraysEqual<T>(T[] xs, T[] ys)
     {
         if (xs.Length != ys.Length) return false;
