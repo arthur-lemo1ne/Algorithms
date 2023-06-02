@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Text;
 namespace AlgorithmsTestProject
@@ -61,14 +62,38 @@ namespace AlgorithmsTestProject
 
         [Test]
 		public static void TestHash()
-		{
-			var input = GeneralInputStrings().Take(10).ToArray();
-			foreach(var s in input)
-			{
-				Console.WriteLine(s);
-			}
-			var keys = input.Select(x => new MyKey(x)).ToArray();
-		}
+        {
+            var input = GeneratInputStrings().Take(10000).ToArray();
+            foreach (var s in input)
+            {
+                //Console.WriteLine(s);
+            }
+            var keys = input.Select(x => new MyKey(x)).ToArray();
+
+            {
+                Console.WriteLine($"Creating a dictionary with my naive hash function");
+                var sw = Stopwatch.StartNew();
+                var d = new Dictionary<MyKey, bool>();
+                foreach (var k in keys)
+                {
+                    if (!d.ContainsKey(k))
+                        d.Add(k, true);
+                }
+
+                Console.WriteLine($"Time to insert {keys.Length} items was {sw.Elapsed.Milliseconds:0.####}ms");
+            }
+            {
+                Console.WriteLine($"Creating a dictionary with default hash function");
+                var sw = Stopwatch.StartNew();
+                var d = new Dictionary<string, bool>();
+                foreach (var k in keys)
+                {
+                    if (!d.ContainsKey(k.MyString))
+                        d.Add(k.MyString, true);
+                }
+
+                Console.WriteLine($"Time to insert {keys.Length} items was {sw.Elapsed.Milliseconds:0.####}ms");
+            }
+        }
     }
 }
-
